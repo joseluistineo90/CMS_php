@@ -8,7 +8,7 @@
 			<?php echo menu($curso_reg,$capitulo_reg);?>
 			<br>
 				<br>
-				<a href="new-course.php">AGREGAR CURSO</a>
+				<a href="new-course.php"><input type="button" name="Agregar Curso" value="Agregar Curso"></a>
             </ul>
 			</td>
 			<td id="pagina">
