@@ -1,6 +1,6 @@
 <?php require_once("includes/connection_db.php");?>
 <?php require_once("includes/functions.php");?>
-<?php obtener_pagina(); ?>
+
 <?php
 
 	if(intval($_GET["curso"]) == 0)
@@ -15,18 +15,32 @@
 	
 validar_campos_obligatorios (array("nombre","posicion","visibilidad"),$errores);
 	
-	if (!empty($errores))
+	if (empty($errores))
 	{
-		header("location: new-course.php");
-		exit;
-	}
-	$curso_id = $_GET["curso"];
+		$curso_id = $_GET["curso"];
 	$nombre = (htmlentities($_POST["nombre"],ENT_QUOTES,"UTF-8"));
 	$posicion = (htmlentities ($_POST["posicion"],ENT_QUOTES,"UTF-8"));
 	$visibilidad = (htmlentities ($_POST["visibilidad"],ENT_QUOTES,"UTF-8"));
+	 $consulta = "UPDATE cursos SET
+	 			 nombre = '{$nombre}',		posicion = {$posicion},
+	 			 visibilidad = {$visibilidad}
+	 			 WHERE id = {$curso_id}
+	 			 ";
+	 $resultado = mysql_query($consulta,$conexion);
+	 if (mysql_affected_rows() == 1)
+	 {
+	 	//Funcionó
+	 }
+	 else 
+	 {
+	 	//Error
+	 }
 
+	  }
+	
 	}
 ?>
+<?php obtener_pagina(); ?>
 <?php include("includes/header.php");?>
 	<table id="estructura">
 		<tr>
@@ -45,7 +59,7 @@ validar_campos_obligatorios (array("nombre","posicion","visibilidad"),$errores);
 					for($i=1;$i<=$num_cursos+1;$i++)
 					{
 						echo "<option value=\"{$i}\"";
-						if($curso_reg["id"] == $i) 
+						if($curso_reg["posicion"] == $i) 
 						{
 						echo "selected";
 					    }

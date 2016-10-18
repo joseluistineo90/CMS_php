@@ -11,11 +11,11 @@ function validar_campos_obligatorios($campos_obligatorios,$errores)
  {
  		foreach ($campos_obligatorios as $campo) 
 {
-		if(!isset($_POST[$campo]) || empty ($_POST[$campo]))
+		if(!isset($_POST[$campo]) || (empty ($_POST[$campo]) && !is_numeric($_POST[$campo])))
 	{
 		$errores[]=$campo;
 	}
- }
+  }
  }
 function obtener_cursos()
 {   
