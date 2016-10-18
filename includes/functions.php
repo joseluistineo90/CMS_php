@@ -106,7 +106,7 @@ function menu($curso_reg,$capitulo_reg)
 		$salida .= "class=\"selected\"";
 		}	
 
-		$salida .= "><a href=\"content.php?curso=" .urlencode($curso["id"]) ."\">" . $curso["nombre"] . "</a></li><ul class = 'capitulos'>";
+		$salida .= "><a href=\"edit_course.php?curso=" .urlencode($curso["id"]) ."\">" . $curso["nombre"] . "</a></li><ul class = 'capitulos'>";
 				
 	$capitulos = obtener_capitulos_por_curso($curso["id"]);
 		while($capitulo = mysql_fetch_array($capitulos))
