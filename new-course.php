@@ -23,9 +23,9 @@
 				?>
 				</select>
 				</p>
-				<p>Visibilidad:
-<input type="radio" name="visibilidad" value="0">0</input>
-<input type="radio" name="visibilidad" value="1">1</input>
+				<p>Visible:
+<input type="radio" name="visibilidad" value="0">NO</input>
+<input type="radio" name="visibilidad" value="1">SI</input>
 				</p>
 				<input type="submit" name="" value="Agregar curso"/>
 			</form><br><br>

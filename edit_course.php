@@ -1,6 +1,32 @@
 <?php require_once("includes/connection_db.php");?>
 <?php require_once("includes/functions.php");?>
 <?php obtener_pagina(); ?>
+<?php
+
+	if(intval($_GET["curso"]) == 0)
+	{
+		header ("Location :content.php ");
+		exit;
+	}
+
+	if(isset($_POST["nombre"]))
+	{
+		$errores = array();
+	
+validar_campos_obligatorios (array("nombre","posicion","visibilidad"),$errores);
+	
+	if (!empty($errores))
+	{
+		header("location: new-course.php");
+		exit;
+	}
+	$curso_id = $_GET["curso"];
+	$nombre = (htmlentities($_POST["nombre"],ENT_QUOTES,"UTF-8"));
+	$posicion = (htmlentities ($_POST["posicion"],ENT_QUOTES,"UTF-8"));
+	$visibilidad = (htmlentities ($_POST["visibilidad"],ENT_QUOTES,"UTF-8"));
+
+	}
+?>
 <?php include("includes/header.php");?>
 	<table id="estructura">
 		<tr>
@@ -10,7 +36,7 @@
 			<td id="pagina">
 			<h2>Editar Curso <?php echo $curso_reg["nombre"] ?></h2>
 			<form action="edit_course.php?curso=<?php echo urlencode($curso_reg["id"]); ?>" method="post">
-				<p>Nombre de curso :<input  name="nombre"></p>
+				<p>Nombre de curso :<input  name="nombre" value="<?php echo $curso_reg["nombre"] ?>"></p>
 				<p>Posición:
 				<select name="posicion">
 				<?php
@@ -18,16 +44,25 @@
 					$num_cursos = mysql_num_rows($todos_los_cursos);
 					for($i=1;$i<=$num_cursos+1;$i++)
 					{
-						echo "<option value=\"{$i}\">{$i}</option>";
+						echo "<option value=\"{$i}\"";
+						if($curso_reg["id"] == $i) 
+						{
+						echo "selected";
+					    }
+						echo ">{$i}</option>";
 					}					
 				?>
 				</select>
 				</p>
-				<p>Visibilidad:
-<input type="radio" name="visibilidad" value="0">0</input>
-<input type="radio" name="visibilidad" value="1">1</input>
+				<p>Visible:
+<input type="radio" name="visibilidad" value="0"
+<?php if($curso_reg["visibilidad"] == 0){echo "checked";}?>
+>NO</input>
+<input type="radio" name="visibilidad" value="1"
+<?php if($curso_reg["visibilidad"] == 1){echo "checked";}?>
+>SI</input>
 				</p>
-				<input type="submit" name="" value="Agregar curso"/>
+				<input type="submit" name="" value="Editar curso"/>
 			</form><br><br>
 			<a href="content.php">Cancelar</a>
 			</td>
