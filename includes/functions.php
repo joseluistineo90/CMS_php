@@ -7,8 +7,9 @@ if(!$consulta)
 		}
 }
 
-function validar_campos_obligatorios($campos_obligatorios,$errores)	
+function validar_campos_obligatorios($campos_obligatorios)	
  {
+ 		$errores = array();
  		foreach ($campos_obligatorios as $campo) 
 {
 		if(!isset($_POST[$campo]) || (empty ($_POST[$campo]) && !is_numeric($_POST[$campo])))
@@ -16,6 +17,7 @@ function validar_campos_obligatorios($campos_obligatorios,$errores)
 		$errores[]=$campo;
 	}
   }
+   return $errores; 
  }
 function obtener_cursos()
 {   

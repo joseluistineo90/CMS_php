@@ -1,9 +1,9 @@
 <?php require_once("includes/connection_db.php");?>
 <?php require_once("includes/functions.php");?>
 <?php
-	$errores = array();
+	$errores = validar_campos_obligatorios (array("nombre","posicion","visibilidad"));
+
 	
-validar_campos_obligatorios (array("nombre","posicion","visibilidad"),$errores);
 	
 	if (!empty($errores))
 	{

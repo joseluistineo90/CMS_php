@@ -11,9 +11,9 @@
 
 	if(isset($_POST["nombre"]))
 	{
-		$errores = array();
+		
 	
-validar_campos_obligatorios (array("nombre","posicion","visibilidad"),$errores);
+$errores = validar_campos_obligatorios (array("nombre","posicion","visibilidad"));
 	
 	if (empty($errores))
 	{
@@ -29,15 +29,17 @@ validar_campos_obligatorios (array("nombre","posicion","visibilidad"),$errores);
 	 $resultado = mysql_query($consulta,$conexion);
 	 if (mysql_affected_rows() == 1)
 	 {
-	 	//Funcionó
+	 	$mensaje = "Se actulizo bien el curso";
 	 }
 	 else 
 	 {
-	 	//Error
+	 	$mensaje = "Hubo un error. <br>" .mysql_error();
 	 }
 
 	  }
-	
+	   else {
+	   	$mensaje = "Se han obtenido " .count($errores) . " errores";
+	   }
 	}
 ?>
 <?php obtener_pagina(); ?>
@@ -79,6 +81,16 @@ validar_campos_obligatorios (array("nombre","posicion","visibilidad"),$errores);
 				<input type="submit" name="" value="Editar curso"/>
 			</form><br><br>
 			<a href="content.php">Cancelar</a>
+			<p><?php 
+			if(isset($mensaje))
+			{
+				echo $mensaje;
+				foreach ($errores as $error) {
+					echo "<br>" . "falta " . $error;
+				}
+			}
+				?></p>
+			
 			</td>
 		</tr>
 	</table>
