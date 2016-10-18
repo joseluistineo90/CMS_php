@@ -81,6 +81,7 @@ $errores = validar_campos_obligatorios (array("nombre","posicion","visibilidad")
 				<input type="submit" name="" value="Editar curso"/>
 			</form><br><br>
 			<a href="content.php">Cancelar</a>
+			<a href="delete_course.php?curso=<?php echo urldecode($curso_reg["id"]); ?>">Borrar curso</a>
 			<p><?php 
 			if(isset($mensaje))
 			{
