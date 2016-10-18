@@ -1,6 +1,19 @@
 <?php require_once("includes/connection_db.php");?>
 <?php require_once("includes/functions.php");?>
 <?php
+	$errores = array();
+	if(!isset($_POST["nombre"]) || empty ($_POST["nombre"]))
+	{
+		$errores[]="nombre";
+	}
+	if (!empty($errores))
+	{
+		header("location: new-course.php");
+		exit;
+	}
+?>
+
+<?php
 	$nombre = (htmlentities($_POST["nombre"],ENT_QUOTES,"UTF-8"));
 	$posicion = (htmlentities ($_POST["posicion"],ENT_QUOTES,"UTF-8"));
 	$visibilidad = (htmlentities ($_POST["visibilidad"],ENT_QUOTES,"UTF-8"));
