@@ -2,10 +2,9 @@
 <?php require_once("includes/functions.php");?>
 <?php
 	$errores = array();
-	if(!isset($_POST["nombre"]) || empty ($_POST["nombre"]))
-	{
-		$errores[]="nombre";
-	}
+	
+validar_campos_obligatorios (array("nombre","posicion","visibilidad"),$errores);
+	
 	if (!empty($errores))
 	{
 		header("location: new-course.php");

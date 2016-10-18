@@ -5,7 +5,18 @@ if(!$consulta)
 		{
 		die("No se pudo realizarconexion a la basedatos :" .mysql_error());	
 		}
-}	
+}
+
+function validar_campos_obligatorios($campos_obligatorios,$errores)	
+ {
+ 		foreach ($campos_obligatorios as $campo) 
+{
+		if(!isset($_POST[$campo]) || empty ($_POST[$campo]))
+	{
+		$errores[]=$campo;
+	}
+ }
+ }
 function obtener_cursos()
 {   
 	global $conexion;
